@@ -46,13 +46,9 @@ public class ResourceServerConfig {
 
 		http.csrf(csrf -> csrf.disable());
 		http.authorizeHttpRequests(authorize -> authorize
-				.requestMatchers(HttpMethod.GET, "/products/**").permitAll()
-				.requestMatchers(HttpMethod.GET, "/categories/**").permitAll()
-				.requestMatchers(HttpMethod.GET, "/users/**").hasRole("ADMIN")
-				.requestMatchers(HttpMethod.POST, "/users/**").hasRole("ADMIN")
-				.requestMatchers(HttpMethod.PUT, "/users/**").hasRole("ADMIN")
-				.requestMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
-				.anyRequest().authenticated());
+				.requestMatchers(HttpMethod.POST, "/employees/**").hasRole("ADMIN")
+				.requestMatchers(HttpMethod.GET, "/employees/**").authenticated()
+				.requestMatchers(HttpMethod.GET, "/departments/**").authenticated());
 		http.oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(Customizer.withDefaults()));
 		http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
 		return http.build();
